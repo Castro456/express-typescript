@@ -1,0 +1,49 @@
+{
+  "name": "express-typescript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec ts-node server.ts",
+    "build": "tsc",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -d ./app/data-source.ts",
+    "migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert -d ./app/data-source.ts",
+    "schema:sync": "npm run typeorm schema:sync -d app/data-source.ts",
+    "migration:show": "npm run typeorm migration:show -d app/data-source.ts",
+    "migration:generate": "npm run typeorm -- migration:generate -d ./app/data-source.ts",
+    "migration:generate_o1": "npx typeorm-ts-node-commonjs migration:generate ./app/migration/CreateUsersTable -d ./app/data-source.ts",
+    "migration:generate_o2": "npm run typeorm migration:generate -d ./app/data-source.ts",
+    "migration:create": "npm run migration:create app/migration/CreateUsers",
+    "migration:create_o": "npm run typeorm migration:create"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^22.13.4",
+    "@types/nodemon": "^1.19.6",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/debug": "^4.1.12",
+    "@types/jsonwebtoken": "^9.0.8",
+    "@types/pg": "^8.11.11",
+    "bcrypt": "^5.1.1",
+    "debug": "^4.4.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-validator": "^7.2.1",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "pg": "^8.13.3",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.20"
+  }
+}
