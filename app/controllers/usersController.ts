@@ -1,35 +1,14 @@
 import {Request, Response, NextFunction} from "express";
-import { UserResponse } from "../dto/users.dto"
-import { AppDataSource } from "../data-source";
-import { Users } from "../entities/Users.entity"
+import * as userServices from "../services/users.service"
 
-export const getUsers = async (req: Request, res: Response, next: NextFunction) => {
-  // const userPayload = new UserResponse(
-  //   "Castro",
-  //   "Zac",
-  //   "Hide",
-  //   "castro@gmail.com",
-  //   "986758475",
-  //   new Date
-  // );
-
+export const getUsers = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const usersRepository = AppDataSource.getRepository(Users);
-    const usersList = await usersRepository.find();
-    
-    // const userPayload: UserResponse = {
-    //   fname: 'Castro',
-    //   lname: 'Zac',
-    //   uname: 'hide',
-    //   email: 'castro@gmail.com',
-    //   phone: '9567446587',
-    //   lastLogin: '21-02-25'
-    // };
-  
-    // res.status(200).json(userPayload);
-    res.json(usersList.map(user => Object.assign({}, user)));
+    const usersList = await userServices.getUsersList();
+    res.json(usersList);
   }
   catch(Error) {
-    console.log(Error);
+    res.status(500).json({
+      message: "Internal server error"
+    });
   }
 }
