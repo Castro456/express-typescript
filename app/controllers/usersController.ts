@@ -13,3 +13,9 @@ export const getUsers = async (req: Request, res: Response, next: NextFunction):
     });
   }
 }
+
+export const registerUser = async(req: Request, res: Response) => {
+  res.status(200).json({
+    message: "Sample success"
+  });
+}
